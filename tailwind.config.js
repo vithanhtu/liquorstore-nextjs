@@ -9,7 +9,14 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "brown-primary": "#a23f25",
+      },
+      backgroundImage: {
+        "navbar-banner": "url('../public/images/bg_2.jpg.webp')",
+      },
+    },
   },
   plugins: [],
 };

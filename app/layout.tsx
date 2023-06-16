@@ -1,5 +1,7 @@
 import "./globals.css";
 import { Spectral } from "next/font/google";
+import ClientOnly from "./components/OnlyClient";
+import Header from "./components/header/Header";
 
 const spectral = Spectral({
   weight: ["400", "500", "600", "700", "800"],
@@ -19,7 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={spectral.className}>{children}</body>
+      <body className={spectral.className}>
+        <ClientOnly>{}</ClientOnly>
+        {children}
+      </body>
     </html>
   );
 }
