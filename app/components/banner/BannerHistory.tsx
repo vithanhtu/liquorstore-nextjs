@@ -1,17 +1,44 @@
 import Image from "next/image";
 import React from "react";
 import Container from "../Container";
-import img from "@/public/images/about.jpg.webp";
+import ImgBanner from "@/public/images/about.jpg.webp";
 
 const BannerHistory = () => {
+  const categories = [
+    {
+      img: "kind-1.jpg.webp",
+      title: "Brandy",
+    },
+    {
+      img: "kind-2.jpg.webp",
+      title: "Gin",
+    },
+    {
+      img: "kind-3.jpg.webp",
+      title: "Rum",
+    },
+    {
+      img: "kind-4.jpg.webp",
+      title: "Tequila",
+    },
+    {
+      img: "kind-5.jpg.webp",
+      title: "Vodka",
+    },
+    {
+      img: "kind-6.jpg.webp",
+      title: "Whiskey",
+    },
+  ];
+
   return (
     <Container>
-      <div className="flex flex-wrap h-auto mb-36">
+      <div className="flex flex-wrap h-auto mb-16">
         <div className="md:w-1/2 w-full h-auto">
           <Image
-            className="w-full h-full object-cover"
+            className="w-full h-full 2xl:h-[550px] object-cover"
             alt="banner"
-            src={img}
+            src={ImgBanner}
           />
         </div>
         <div className="md:w-1/2 w-full h-full flex items-center">
@@ -42,6 +69,26 @@ const BannerHistory = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-center md:justify-between flex-wrap mb-36 px-12">
+        {categories &&
+          categories.map((item, index) => {
+            console.log(item);
+            return (
+              <div key={index}>
+                <div className="relative category mx-6 mt-12">
+                  <div className="category-image"></div>
+                  <Image
+                    src={require(`@/public/images/${item.img}`)}
+                    className="rounded-[50%] w-[130px] h-[130px] object-cover z-0"
+                    alt="categories"
+                  />
+                </div>
+                <h2 className="text-center mt-5 text-xl">{item.title}</h2>
+              </div>
+            );
+          })}
       </div>
     </Container>
   );
