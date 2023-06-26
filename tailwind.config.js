@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       colors: {
         "brown-primary": "#a23f25",
+        "brown-color": "#b7472a",
       },
       backgroundImage: {
         "navbar-banner": "url('../public/images/bg_2.jpg.webp')",
