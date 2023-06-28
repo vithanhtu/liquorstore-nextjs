@@ -16,6 +16,10 @@ module.exports = {
       },
       backgroundImage: {
         "navbar-banner": "url('../public/images/bg_2.jpg.webp')",
+        slider: "url('../public/images/bg_4.jpg.webp')",
+      },
+      gridTemplateColumns: {
+        fluid: "repeat(auto-fit, minmax(250px, 1fr))",
       },
     },
   },

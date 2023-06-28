@@ -74,7 +74,6 @@ const BannerHistory = () => {
       <div className="flex justify-center md:justify-between flex-wrap mb-36 px-12">
         {categories &&
           categories.map((item, index) => {
-            console.log(item);
             return (
               <div key={index}>
                 <div className="relative category mx-6 mt-12">
