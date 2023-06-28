@@ -21,7 +21,7 @@ const Menu = () => {
       <div className="grid grid-cols-fluid gap-6">
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img1}
             alt="product"
           />
@@ -39,7 +39,7 @@ const Menu = () => {
         </div>
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img2}
             alt="product"
           />
@@ -58,7 +58,7 @@ const Menu = () => {
         </div>
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img3}
             alt="product"
           />
@@ -73,7 +73,7 @@ const Menu = () => {
         </div>
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img4}
             alt="product"
           />
@@ -88,7 +88,7 @@ const Menu = () => {
         </div>
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img5}
             alt="product"
           />
@@ -103,7 +103,7 @@ const Menu = () => {
         </div>
         <div className="w-full h-auto mt-12">
           <Image
-            className="w-full h-96 bg-cover bg-center rounded-[4px]"
+            className="w-full h-96 object-cover bg-center rounded-[4px]"
             src={img6}
             alt="product"
           />

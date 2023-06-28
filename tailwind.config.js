@@ -22,6 +22,10 @@ module.exports = {
         fluid: "repeat(auto-fit, minmax(250px, 1fr))",
       },
     },
+    // screens: {
+    //   xxl: "1650px",
+    //   // => @media (min-width: 1650px) { ... }
+    // },
   },
   plugins: [],
 };

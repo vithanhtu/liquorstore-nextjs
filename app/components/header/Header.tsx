@@ -69,15 +69,15 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
               <h1 className="text-center">{heading}</h1>
             </div>
           ) : (
-            <div className="transform rotate-[-4deg] w-full h-full flex justify-center items-center text-center">
+            <div className="transform rotate-[-4deg] w-full h-full flex justify-center lg:items-center text-center">
               <div className="banner-heading mb-24">
-                <h1>
+                <h1 className="max-md:text-5xl max-md:ml-2 max-lg:mt-12 max-sm:ml-8">
                   Good <span className="text-[#eee]">Drink</span> for Good{" "}
                   <br />
                   <span className="text-[#eee]">Moment</span>
                 </h1>
 
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-6 items-center max-sm:ml-8">
                   <button className="w-[120px] rounded-md text-sm h-11 bg-brown-primary text-[#eee] flex justify-center items-center">
                     Shop Now
                   </button>

@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.overlay, .overlay-slider {
+.overlay,
+.overlay-slider {
   position: absolute;
   top: 0;
   left: 0;
@@ -56,4 +57,9 @@
 
 .icon-next path {
   stroke: #fff;
+}
+
+.slider-team {
+  width: 92% !important;
+  /* margin-right: 24px; */
 }

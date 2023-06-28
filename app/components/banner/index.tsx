@@ -11,7 +11,7 @@ const Banner = () => {
       <div className="w-full h-auto bg-brown-color mb-16">
         <Container>
           <div className="grid h-full max-lg:grid-cols-1 grid-cols-3">
-            <div className="flex items-center text-white px-3">
+            <div className="flex items-center text-white px-3 py-11">
               <BiSupport className="text-9xl text-white" />
               <div className="ml-5">
                 <h2 className="text-lg font-semibold uppercase">

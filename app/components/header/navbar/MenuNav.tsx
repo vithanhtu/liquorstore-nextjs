@@ -33,11 +33,11 @@ const MenuNav = () => {
   console.log(pathname);
 
   return (
-    <div className="w-full md:block md:w-auto" id="navbar-default">
-      <ul className="font-medium flex uppercase flex-col pl-2 py-2 md:p-0 mt-4 border-l md:flex-row md:space-x-8 md:mt-0 md:border-0">
+    <div className="w-full lg:block lg:w-auto" id="navbar-default">
+      <ul className="font-medium flex uppercase flex-col pl-2 py-2 lg:p-0 mt-4 border-l lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0">
         {data.map((item, index) => {
           return (
-            <li key={index} className="max-md:mb-4">
+            <li key={index} className="max-lg:mb-4">
               <Link
                 href={item.pathname}
                 className={`${
