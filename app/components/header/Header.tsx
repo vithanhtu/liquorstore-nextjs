@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useCallback, useState } from "react";
 import Container from "../Container";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
@@ -8,6 +10,9 @@ import { FiDribbble } from "react-icons/fi";
 import Link from "next/link";
 import Navbar from "./navbar/Navbar";
 import ClientOnly from "../OnlyClient";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import { signOut } from "next-auth/react";
 
 interface BannerProps {
   home?: boolean;
@@ -15,6 +20,17 @@ interface BannerProps {
 }
 
 const Header: React.FC<BannerProps> = ({ home, heading }) => {
+  const loginModal = useLoginModal();
+
+  console.log(loginModal.isOpen);
+  const registerModal = useRegisterModal();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = useCallback(() => {
+    setIsOpen((value) => !value);
+  }, []);
+
   return (
     <ClientOnly>
       <header className="overflow-hidden">
@@ -23,6 +39,9 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
             <div className="flex justify-between h-full items-center">
               <div className="flex text-xs">
                 <div className="mr-5 flex items-center text-[#e8e2e2]">
+                  <h1 onClick={() => signOut()} className="text-white">
+                    Logout
+                  </h1>
                   <BsFillTelephoneFill className="mr-1" />
                   <span> +00 1234 567</span>
                 </div>
@@ -49,8 +68,8 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
                 </div>
 
                 <div className="text-xs ml-6 text-[#e8e2e2]">
-                  <Link href={"/register"}>SIGN UP / </Link>
-                  <Link href={"/login"}>LOGIN</Link>
+                  <span onClick={registerModal.onOpen}>SIGN UP / </span>
+                  <span onClick={loginModal.onOpen}>LOGIN</span>
                 </div>
               </div>
             </div>
