@@ -68,8 +68,15 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
                 </div>
 
                 <div className="text-xs ml-6 text-[#e8e2e2]">
-                  <span onClick={registerModal.onOpen}>SIGN UP / </span>
-                  <span onClick={loginModal.onOpen}>LOGIN</span>
+                  <span
+                    className="cursor-pointer"
+                    onClick={registerModal.onOpen}
+                  >
+                    SIGN UP /{" "}
+                  </span>
+                  <span className="cursor-pointer" onClick={loginModal.onOpen}>
+                    LOGIN
+                  </span>
                 </div>
               </div>
             </div>
