@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Container from "../Container";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
@@ -13,6 +13,8 @@ import ClientOnly from "../OnlyClient";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { signOut } from "next-auth/react";
+import { useSelector } from "react-redux";
+import Avatar from "../Avatar";
 
 interface BannerProps {
   home?: boolean;
@@ -21,15 +23,10 @@ interface BannerProps {
 
 const Header: React.FC<BannerProps> = ({ home, heading }) => {
   const loginModal = useLoginModal();
-
-  console.log(loginModal.isOpen);
   const registerModal = useRegisterModal();
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleOpen = useCallback(() => {
-    setIsOpen((value) => !value);
-  }, []);
+  const account = useSelector((state: any) => state.userReducer?.account);
+  console.log("account:", account);
 
   return (
     <ClientOnly>
@@ -39,20 +36,17 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
             <div className="flex justify-between h-full items-center">
               <div className="flex text-xs">
                 <div className="mr-5 flex items-center text-[#e8e2e2]">
-                  <h1 onClick={() => signOut()} className="text-white">
-                    Logout
-                  </h1>
                   <BsFillTelephoneFill className="mr-1" />
                   <span> +00 1234 567</span>
                 </div>
-                <div className="flex items-center text-[#e8e2e2]">
+                <div className="md:flex items-center hidden text-[#e8e2e2]">
                   <BiPaperPlane className="mr-1 text-sm" />
                   <span> youremail@email.com</span>
                 </div>
               </div>
 
-              <div className="flex">
-                <div className="flex text-sm text-white">
+              <div className="flex items-center">
+                <div className="md:flex text-sm text-white hidden">
                   <Link href={"/"}>
                     <FaFacebookF className="text-xs" />
                   </Link>
@@ -67,17 +61,37 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
                   </Link>
                 </div>
 
-                <div className="text-xs ml-6 text-[#e8e2e2]">
-                  <span
-                    className="cursor-pointer"
-                    onClick={registerModal.onOpen}
-                  >
-                    SIGN UP /{" "}
-                  </span>
-                  <span className="cursor-pointer" onClick={loginModal.onOpen}>
-                    LOGIN
-                  </span>
-                </div>
+                {account ? (
+                  <div className="ml-12 relative z-30 text-white">
+                    <div className="flex items-center">
+                      <div>
+                        <Avatar src={account.image} />
+                      </div>
+                      <span className="text-sm ml-2">{account.name} / </span>
+                      <span
+                        className="text-xs cursor-pointer"
+                        onClick={() => signOut()}
+                      >
+                        Logout
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-xs ml-6 text-[#e8e2e2]">
+                    <span
+                      className="cursor-pointer"
+                      onClick={registerModal.onOpen}
+                    >
+                      SIGN UP /{" "}
+                    </span>
+                    <span
+                      className="cursor-pointer"
+                      onClick={loginModal.onOpen}
+                    >
+                      LOGIN
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </Container>

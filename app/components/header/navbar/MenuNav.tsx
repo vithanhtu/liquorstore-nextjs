@@ -30,7 +30,7 @@ const data = [
 
 const MenuNav = () => {
   const pathname = usePathname();
-  console.log(pathname);
+  // console.log(pathname);
 
   return (
     <div className="w-full lg:block lg:w-auto" id="navbar-default">

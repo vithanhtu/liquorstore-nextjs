@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type AuthState = {
-  account: object;
+  account: null | object;
 };
 
 const initialState = {
-  account: {},
+  account: null,
 } as AuthState;
 
 export const auth = createSlice({
@@ -14,6 +14,7 @@ export const auth = createSlice({
   reducers: {
     reset: () => initialState,
     getAccount: (state, action: PayloadAction<object>) => {
+      // console.log(action.payload);
       state.account = action.payload;
     },
   },

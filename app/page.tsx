@@ -3,7 +3,7 @@ import Banner from "./components/banner";
 import Header from "./components/header/Header";
 import Slider from "./components/slider";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Header home={true} />

@@ -1,10 +1,8 @@
 "use client";
 
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import { getAccount } from "@/app/redux/features/auth-slice";
 import { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../Button";
 
@@ -66,13 +64,13 @@ const Modal: React.FC<ModalProps> = ({
     secondaryAction();
   }, [secondaryAction, disabled]);
 
-  // const dispatch = useDispatch();
-  // const user = getCurrentUser();
-  // user.then((data) => console.log(data));
-
   if (!isOpen) {
     return null;
   }
+
+  // const dispatch = useDispatch();
+  // const user = getCurrentUser();
+  // user.then((data) => console.log(data));
 
   return (
     <>
