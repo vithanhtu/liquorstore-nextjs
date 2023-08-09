@@ -43,3 +43,29 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model Product {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String
+  category     String
+  price        Float
+  salePrice    Float    @default(-1)
+  sold         Float    @default(-1)
+  stock        Float    @default(-1)
+  manufactured String?
+  imageUrl     Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  reviews      Review[]
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  rating    Int // Rating scale from 1 to 5, for example.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  productId String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}

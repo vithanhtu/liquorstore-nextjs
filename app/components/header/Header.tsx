@@ -26,7 +26,7 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
   const registerModal = useRegisterModal();
 
   const account = useSelector((state: any) => state.userReducer?.account);
-  console.log("account:", account);
+  // console.log("account:", account);
 
   return (
     <ClientOnly>

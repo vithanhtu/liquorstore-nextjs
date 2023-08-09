@@ -5,7 +5,7 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import BannerHistory from "./BannerHistory";
 
-const Banner = () => {
+const Banner = async () => {
   return (
     <>
       <div className="w-full h-auto bg-brown-color mb-16">
