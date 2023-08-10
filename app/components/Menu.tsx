@@ -4,14 +4,9 @@ import React, { useEffect, useState } from "react";
 import Container from "./Container";
 import Image from "next/image";
 import { GrFormNextLink } from "react-icons/gr";
-import img1 from "@/public/images/prod-1.jpg.webp";
-import img2 from "@/public/images/prod-2.jpg.webp";
-import img3 from "@/public/images/prod-3.jpg.webp";
-import img4 from "@/public/images/prod-4.jpg.webp";
-import img5 from "@/public/images/prod-5.jpg.webp";
-import img6 from "@/public/images/prod-6.jpg.webp";
+import { MdShoppingCartCheckout } from "react-icons/md";
+import { FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
-import { getAllProduct } from "../actions/products";
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
@@ -31,23 +26,44 @@ const Menu = () => {
 
   return (
     <Container>
-      <span className="italic text-brown-primary">
-        Our Delightful offerings
-      </span>
-      <h2>Tastefully Yours</h2>
+      <div className="text-center">
+        <span className="italic text-brown-primary text-xl">
+          Our Delightful offerings
+        </span>
+        <h2 className="text-[40px] mt-1">Tastefully Yours</h2>
+      </div>
 
       <div className="grid grid-cols-fluid gap-6">
         {Array.isArray(products) &&
           products.map((product: any, index: number) => {
             return (
               <div className="w-full h-auto mt-12" key={index}>
-                <Image
-                  className="w-full h-96 bg-center rounded-[4px]"
-                  src={product.imageUrl}
-                  width={250}
-                  height={380}
-                  alt="product"
-                />
+                <div className="relative product-image cursor-pointer">
+                  <Image
+                    className="w-full h-96 bg-center rounded-[4px]"
+                    src={product.imageUrl}
+                    width={250}
+                    height={380}
+                    alt="product-img"
+                  />
+                  <div className="product-overlay">
+                    <div className="flex text-white h-full justify-center items-center">
+                      <Link
+                        href={"/cart"}
+                        className="w-[60px] h-[60px] border border-solid border-white/75 mx-1 hover:bg-slate-600/50 mb-10 flex justify-center items-center text-xl"
+                      >
+                        <MdShoppingCartCheckout />
+                      </Link>
+                      <Link
+                        onClick={() => console.log(product.id)}
+                        href={`/product/${product.id}`}
+                        className="w-[60px] h-[60px] border border-solid border-white/75 mx-1 hover:bg-slate-600/50 mb-10 flex justify-center items-center text-xl"
+                      >
+                        <FaEyeSlash />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
                 {product.salePrice > 0 ? (
                   <span className="bg-brown-primary pt-[2px] px-2 ml-2 text-white font-light text-sm">
                     sale

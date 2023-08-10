@@ -1,4 +1,5 @@
 import Menu from "./components/Menu";
+import ClientOnly from "./components/OnlyClient";
 import Banner from "./components/banner";
 import Header from "./components/header/Header";
 import Slider from "./components/slider";
@@ -6,7 +7,9 @@ import Slider from "./components/slider";
 export default async function Home() {
   return (
     <>
-      <Header home={true} />
+      <ClientOnly>
+        <Header home={true} />
+      </ClientOnly>
       <Banner />
       <Menu />
       <Slider />
