@@ -76,3 +76,9 @@
 .product-image:hover .product-overlay {
   opacity: 1;
 }
+
+@media screen and (min-width: 1660px) {
+  .container {
+    width: 75% !important;
+  }
+}

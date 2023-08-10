@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 const data = [
   {
@@ -30,7 +30,8 @@ const data = [
 
 const MenuNav = () => {
   const pathname = usePathname();
-  // console.log(pathname);
+  const params = useParams();
+  // console.log(params);
 
   return (
     <div className="w-full lg:block lg:w-auto" id="navbar-default">
@@ -41,7 +42,10 @@ const MenuNav = () => {
               <Link
                 href={item.pathname}
                 className={`${
-                  pathname === item.pathname ? "text-white" : "text-white/70"
+                  pathname === item.pathname ||
+                  pathname === `${item.pathname}/${params.id}`
+                    ? "text-white hover:text-[#b7472a]"
+                    : "text-white/70 hover:text-[#b7472a]"
                 }`}
               >
                 {item.title}

@@ -106,7 +106,7 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
           <Navbar />
           {heading ? (
             <div className="text-white text-5xl relative top-8 flex justify-center items-center flex-col w-full h-full z-10">
-              <h1 className="text-center">{heading}</h1>
+              <h1 className="text-center mb-20">{heading}</h1>
             </div>
           ) : (
             <div className="transform rotate-[-4deg] w-full h-full flex justify-center lg:items-center text-center">
