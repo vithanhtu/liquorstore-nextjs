@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useParams, usePathname } from "next/navigation";
+import useCartModal from "@/app/hooks/useCartModal";
 
 const data = [
   {
@@ -29,6 +30,7 @@ const data = [
 ];
 
 const MenuNav = () => {
+  const cartModal = useCartModal();
   const pathname = usePathname();
   const params = useParams();
   // console.log(params);
@@ -43,7 +45,7 @@ const MenuNav = () => {
                 href={item.pathname}
                 className={`${
                   pathname === item.pathname ||
-                  pathname === `${item.pathname}/${params.id}`
+                  pathname === `${item.pathname}/${params?.id}`
                     ? "text-white hover:text-[#b7472a]"
                     : "text-white/70 hover:text-[#b7472a]"
                 }`}
@@ -54,9 +56,12 @@ const MenuNav = () => {
           );
         })}
         <li>
-          <Link href="/cart" className="text-white/70">
+          <div
+            onClick={cartModal.onOpen}
+            className="text-white/70 cursor-pointer"
+          >
             <BsFillCartPlusFill />
-          </Link>
+          </div>
         </li>
       </ul>
     </div>
