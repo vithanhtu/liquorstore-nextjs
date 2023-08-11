@@ -3,11 +3,17 @@
 import React from "react";
 import Link from "next/link";
 import ClientOnly from "../OnlyClient";
-import Header from "../header/Header";
 import useCartModal from "@/app/hooks/useCartModal";
+import { useDispatch, useSelector } from "react-redux";
+import { debounce } from "lodash"; // Import debounce function from lodash
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/app/redux/features/cart-slice";
 
 const CartModal = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const carts = useSelector((state) => state.cartReducer.cart);
   // const itemPrice = carts.reduce(
   //   (init, current) => init + current.qty * current.price,
@@ -15,11 +21,23 @@ const CartModal = () => {
   // );
 
   const togleCart = useCartModal();
-  const isOpen = togleCart.isOpen;
 
-  console.log(isOpen);
+  const carts = useSelector((state: any) => state.cartReducer?.products);
+  console.log(carts);
 
-  if (!isOpen) {
+  // Sử dụng debounce để giới hạn việc gọi hàm handleIncrease sau 100ms
+  const debouncedHandleIncrease = debounce(
+    (productId: string) => dispatch(increaseQuantity(productId)),
+    100
+  );
+
+  // Sử dụng debounce để giới hạn việc gọi hàm handleDecrease sau 100ms
+  const debouncedHandleDecrease = debounce(
+    (productId: string) => dispatch(decreaseQuantity(productId)),
+    100
+  );
+
+  if (!togleCart.isOpen) {
     return null;
   }
 
@@ -77,65 +95,73 @@ const CartModal = () => {
                           role="list"
                           className="-my-6 divide-y divide-gray-200"
                         >
-                          <li className="flex py-6">
-                            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                              <img
-                                // src={product.img}
-                                alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-                                className="h-full w-full object-cover object-center"
-                              />
-                            </div>
-                            <div className="ml-4 flex flex-1 flex-col">
-                              <div>
-                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                  <h3>
-                                    <a href="#">{"title"}</a>
-                                  </h3>
-                                  <p className="ml-4">${56}</p>
-                                </div>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {"info"}
-                                </p>
-                              </div>
-                              <div className="flex flex-1 items-end justify-between text-sm">
-                                <div className="w-1/3 flex justify-between">
-                                  <button
-                                    className="bg-red-500 px-2 text-white text-md"
-                                    // onClick={() =>
-                                    //   dispatch(itemsCart(product.id))
-                                    // }
-                                  >
-                                    {" "}
-                                    -{" "}
-                                  </button>
-                                  <button className="bg-red-500 px-2 text-white text-md">
-                                    {" "}
-                                    {/* {product.qty}{" "} */}
-                                  </button>
-                                  <button
-                                    className="bg-red-500 px-2 text-white text-md"
-                                    // onClick={() =>
-                                    //   dispatch(addToCart(product.id))
-                                    // }
-                                  >
-                                    {" "}
-                                    +{" "}
-                                  </button>
-                                </div>
-                                <div className="flex">
-                                  <button
-                                    // onClick={() =>
-                                    //   dispatch(removeItemCart(product.id))
-                                    // }
-                                    type="button"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
+                          {carts &&
+                            carts.map((product: any, index: number) => {
+                              return (
+                                <li className="flex py-6" key={index}>
+                                  <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <img
+                                      src={product?.imageUrl}
+                                      alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                      className="h-full w-full object-cover object-center"
+                                    />
+                                  </div>
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                        <h3>
+                                          <a href="#">{product?.name}</a>
+                                        </h3>
+                                        <p className="ml-4">
+                                          ${product?.price}
+                                        </p>
+                                      </div>
+                                      <p className="mt-1 text-sm text-gray-500 flex justify-between">
+                                        <span>{product?.category}</span>
+                                        <span className="text-[#000] mt-1">
+                                          Total: $
+                                          {product?.qty * product?.price}
+                                        </span>
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                      <div className="w-1/3 flex justify-between">
+                                        <button
+                                          className="bg-red-500 px-2 text-white text-md cursor-pointer"
+                                          onClick={() =>
+                                            debouncedHandleDecrease(product.id)
+                                          }
+                                        >
+                                          -
+                                        </button>
+                                        <button className="bg-red-500 px-2 text-white">
+                                          {product.qty}
+                                        </button>
+                                        <button
+                                          className="bg-red-500 px-2 text-white text-md cursor-pointer"
+                                          onClick={() =>
+                                            debouncedHandleIncrease(product.id)
+                                          }
+                                        >
+                                          +
+                                        </button>
+                                      </div>
+                                      <div className="flex">
+                                        <button
+                                          // onClick={() =>
+                                          //   dispatch(removeItemCart(product.id))
+                                          // }
+                                          type="button"
+                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        >
+                                          Remove
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>
+                              );
+                            })}
                         </ul>
                       </div>
                     </div>

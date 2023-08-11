@@ -105,7 +105,7 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
           <div className="overlay"></div>
           <Navbar />
           {heading ? (
-            <div className="text-white text-5xl relative top-8 flex justify-center items-center flex-col w-full h-full z-10">
+            <div className="text-white text-5xl relative top-8 flex justify-center items-center flex-col w-full h-full z-2">
               <h1 className="text-center mb-20">{heading}</h1>
             </div>
           ) : (

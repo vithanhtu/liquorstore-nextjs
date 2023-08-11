@@ -5,6 +5,8 @@ import React from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useParams, usePathname } from "next/navigation";
 import useCartModal from "@/app/hooks/useCartModal";
+import { useSelector } from "react-redux";
+import { cart } from "@/app/redux/features/cart-slice";
 
 const data = [
   {
@@ -33,7 +35,8 @@ const MenuNav = () => {
   const cartModal = useCartModal();
   const pathname = usePathname();
   const params = useParams();
-  // console.log(params);
+
+  const carts = useSelector((state: any) => state.cartReducer?.products);
 
   return (
     <div className="w-full lg:block lg:w-auto" id="navbar-default">
@@ -46,9 +49,9 @@ const MenuNav = () => {
                 className={`${
                   pathname === item.pathname ||
                   pathname === `${item.pathname}/${params?.id}`
-                    ? "text-white hover:text-[#b7472a]"
-                    : "text-white/70 hover:text-[#b7472a]"
-                }`}
+                    ? "text-white"
+                    : "text-white/70"
+                } hover:text-brown-color text-[15px]`}
               >
                 {item.title}
               </Link>
@@ -58,9 +61,12 @@ const MenuNav = () => {
         <li>
           <div
             onClick={cartModal.onOpen}
-            className="text-white/70 cursor-pointer"
+            className="text-white/70 cursor-pointer hover:text-brown-color"
           >
-            <BsFillCartPlusFill />
+            <BsFillCartPlusFill className="text-xl" />
+            <p className=" bg-white/25 text-sm text-center top-[-30px] right-[-14px] text-white/75 rounded-[50%] relative">
+              {carts.length}
+            </p>
           </div>
         </li>
       </ul>

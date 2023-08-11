@@ -10,6 +10,8 @@ import { GrFormAdd } from "react-icons/gr";
 import { MdRemove } from "react-icons/md";
 import TabProduct from "@/app/components/tabs/TabProduct";
 import useCartModal from "@/app/hooks/useCartModal";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/redux/features/cart-slice";
 
 interface Product {
   name: String;
@@ -24,6 +26,7 @@ interface Product {
 
 const DetailPage = ({ params }: any) => {
   const id = params.id;
+  const dispatch = useDispatch();
 
   const cartModal = useCartModal();
   const [quantity, setQuantity] = useState(1);
@@ -48,7 +51,7 @@ const DetailPage = ({ params }: any) => {
       .catch((error) => console.error("Error fetching product:", error));
   }, []);
 
-  console.log(product);
+  // console.log(product);
 
   return (
     <div>
@@ -116,7 +119,12 @@ const DetailPage = ({ params }: any) => {
             </p>
 
             <div className="flex gap-2 text-white mt-6">
-              <div className="px-10 py-4 bg-brown-color rounded cursor-pointer">
+              <div
+                className="px-10 py-4 bg-brown-color rounded cursor-pointer"
+                onClick={() =>
+                  dispatch(addToCart({ ...product, qty: quantity }))
+                }
+              >
                 <span>Add to Cart</span>
               </div>
               <div

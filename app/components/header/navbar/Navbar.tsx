@@ -1,11 +1,32 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import Container from "../../Container";
 import MenuNav from "./MenuNav";
 
 const Navbar = () => {
+  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+  const headerHeight = 120; // Điều chỉnh theo chiều cao của header của bạn
+
+  const handleScroll = () => {
+    if (window.scrollY > headerHeight) {
+      setIsHeaderFixed(true);
+    } else {
+      setIsHeaderFixed(false);
+    }
+  };
+
+  // Đăng ký sự kiện cuộn trang
+  window.addEventListener("scroll", handleScroll);
+
   return (
-    <div className="w-full">
+    <div
+      className={`w-full transition-all ${
+        isHeaderFixed ? "fixed-navbar bg-black/90" : ""
+      }`}
+    >
       <Container>
         <nav className="bg-transparent py-3 border-gray-200 dark:bg-gray-900 z-10 relative">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">

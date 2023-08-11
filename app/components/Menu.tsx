@@ -7,9 +7,12 @@ import { GrFormNextLink } from "react-icons/gr";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/cart-slice";
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch("/api/products")
@@ -22,7 +25,7 @@ const Menu = () => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <Container>
@@ -48,14 +51,13 @@ const Menu = () => {
                   />
                   <div className="product-overlay">
                     <div className="flex text-white h-full justify-center items-center">
-                      <Link
-                        href={"/cart"}
+                      <div
+                        onClick={() => dispatch(addToCart({ ...product }))}
                         className="w-[60px] h-[60px] border border-solid border-white/75 mx-1 hover:bg-slate-600/50 mb-10 flex justify-center items-center text-xl"
                       >
                         <MdShoppingCartCheckout />
-                      </Link>
+                      </div>
                       <Link
-                        onClick={() => console.log(product.id)}
                         href={`/product/${product.id}`}
                         className="w-[60px] h-[60px] border border-solid border-white/75 mx-1 hover:bg-slate-600/50 mb-10 flex justify-center items-center text-xl"
                       >
