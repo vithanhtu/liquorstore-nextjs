@@ -6,7 +6,6 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import { useParams, usePathname } from "next/navigation";
 import useCartModal from "@/app/hooks/useCartModal";
 import { useSelector } from "react-redux";
-import { cart } from "@/app/redux/features/cart-slice";
 
 const data = [
   {
@@ -64,7 +63,7 @@ const MenuNav = () => {
             className="text-white/70 cursor-pointer hover:text-brown-color"
           >
             <BsFillCartPlusFill className="text-xl" />
-            <p className=" bg-white/25 text-sm text-center top-[-30px] right-[-14px] text-white/75 rounded-[50%] relative">
+            <p className=" bg-white/25 w-5 text-sm text-center top-[-30px] right-[-14px] text-white/75 rounded-[50%] relative">
               {carts.length}
             </p>
           </div>

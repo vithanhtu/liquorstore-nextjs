@@ -14,16 +14,13 @@ import {
 
 const CartModal = () => {
   const dispatch = useDispatch();
-  // const carts = useSelector((state) => state.cartReducer.cart);
-  // const itemPrice = carts.reduce(
-  //   (init, current) => init + current.qty * current.price,
-  //   0
-  // );
-
   const togleCart = useCartModal();
 
   const carts = useSelector((state: any) => state.cartReducer?.products);
-  console.log(carts);
+  const itemPrice = carts.reduce(
+    (init: number, current: any) => init + current.qty * current.price,
+    0
+  );
 
   // Sử dụng debounce để giới hạn việc gọi hàm handleIncrease sau 100ms
   const debouncedHandleIncrease = debounce(
@@ -44,7 +41,7 @@ const CartModal = () => {
   return (
     <ClientOnly>
       <div
-        className="relative z-10"
+        className="relative z-50"
         aria-labelledby="slide-over-title"
         role="dialog"
         aria-modal="true"
@@ -169,7 +166,7 @@ const CartModal = () => {
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
-                      <p>${75}</p>
+                      <p>${itemPrice}</p>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
                       Shipping and taxes calculated at checkout.
@@ -185,10 +182,7 @@ const CartModal = () => {
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
                         or{" "}
-                        <Link
-                          href={"/product"}
-                          // onClick={() => dispatch(statusCart(false))}
-                        >
+                        <Link href={"/product"} onClick={togleCart.onClose}>
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"

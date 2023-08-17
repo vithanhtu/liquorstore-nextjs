@@ -1,3 +1,4 @@
+import Blog from "./blog/page";
 import Menu from "./components/Menu";
 import ClientOnly from "./components/OnlyClient";
 import Banner from "./components/banner";
@@ -13,6 +14,7 @@ export default async function Home() {
       <Banner />
       <Menu />
       <Slider />
+      <Blog />
     </>
   );
 }

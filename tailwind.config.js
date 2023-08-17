@@ -12,8 +12,10 @@ module.exports = {
     extend: {
       colors: {
         "light-text": "#8a8181",
+        "gray-text": "#808080",
         "brown-primary": "#a23f25",
         "brown-color": "#b7472a",
+        "bg-light": "#f5f4f0",
       },
       backgroundImage: {
         "navbar-banner": "url('../public/images/bg_2.jpg.webp')",
@@ -23,10 +25,6 @@ module.exports = {
         fluid: "repeat(auto-fit, minmax(250px, 1fr))",
       },
     },
-    // screens: {
-    //   xxl: "1650px",
-    //   // => @media (min-width: 1650px) { ... }
-    // },
   },
   plugins: [],
 };

@@ -37,7 +37,7 @@ const index = () => {
   };
 
   return (
-    <div className="w-full h-[650px] bg-center bg-slider mb-40 relative">
+    <div className="w-full h-[650px] bg-center bg-slider relative">
       <div className="overlay-slider"></div>
 
       <Container>

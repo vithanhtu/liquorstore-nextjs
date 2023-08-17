@@ -1,15 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
-import { animateScroll as scroll } from "react-scroll";
+import React, { useEffect, useState } from "react";
 import Container from "../../Container";
 import MenuNav from "./MenuNav";
+import useWindowSize from "@/app/hooks/useWindowSize";
 
 const Navbar = () => {
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const headerHeight = 120; // Điều chỉnh theo chiều cao của header của bạn
+  const [toggleMenuNav, setToggleMenuNav] = useState(false);
 
+  const size = useWindowSize();
+
+  useEffect(() => {
+    if (size?.width && size?.width > 768) {
+      setToggleMenuNav(true);
+    } else {
+      setToggleMenuNav(false);
+    }
+  }, [size.width]);
+
+  const headerHeight = 120; // Điều chỉnh theo chiều cao của header của bạn
   const handleScroll = () => {
     if (window.scrollY > headerHeight) {
       setIsHeaderFixed(true);
@@ -28,9 +39,12 @@ const Navbar = () => {
       }`}
     >
       <Container>
-        <nav className="bg-transparent py-3 border-gray-200 dark:bg-gray-900 z-10 relative">
+        <nav className="bg-transparent max-md:py-0 py-3 border-gray-200 dark:bg-gray-900 relative">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
-            <Link href="/" className="flex items-center text-2xl uppercase">
+            <Link
+              href="/"
+              className="flex items-center max-md:text-xl text-2xl uppercase"
+            >
               <h1 className="text-white/90">Liquor</h1>
               <span className="self-center ml-2 font-semibold whitespace-nowrap text-white/50">
                 store
@@ -39,9 +53,10 @@ const Navbar = () => {
             <button
               data-collapse-toggle="navbar-default"
               type="button"
-              className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-1 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-default"
               aria-expanded="false"
+              onClick={() => setToggleMenuNav(!toggleMenuNav)}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -58,7 +73,7 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-            <MenuNav />
+            {toggleMenuNav ? <MenuNav /> : ""}
           </div>
         </nav>
       </Container>
