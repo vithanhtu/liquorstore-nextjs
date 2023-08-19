@@ -18,7 +18,7 @@ const data = [
   },
   {
     title: "Product",
-    pathname: "/product",
+    pathname: "/products",
   },
   {
     title: "Blog",

@@ -6,6 +6,7 @@ import RegisterModal from "./components/modals/RegisterModal";
 import { Providers } from "./redux/provider";
 import getCurrentUser from "./actions/getCurrentUser";
 import CartModal from "./components/modals/CartModal";
+import Footer from "./components/footer/Footer";
 
 const spectral = Spectral({
   weight: ["400", "500", "600", "700", "800"],
@@ -35,6 +36,7 @@ export default async function RootLayout({
             <CartModal />
           </ClientOnly>
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

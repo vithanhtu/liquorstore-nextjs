@@ -5,12 +5,30 @@ import React, { useEffect, useState } from "react";
 import Container from "../../Container";
 import MenuNav from "./MenuNav";
 import useWindowSize from "@/app/hooks/useWindowSize";
+import { debounce } from "lodash";
 
 const Navbar = () => {
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
   const [toggleMenuNav, setToggleMenuNav] = useState(false);
-
   const size = useWindowSize();
+
+  useEffect(() => {
+    const headerHeight = 120; // Adjust to your header's height
+    const handleScroll = () => {
+      if (window.scrollY > headerHeight) {
+        setIsHeaderFixed(true);
+      } else {
+        setIsHeaderFixed(false);
+      }
+    };
+
+    const debouncedHandleScroll = debounce(handleScroll, 100); // Use lodash.debounce
+
+    window.addEventListener("scroll", debouncedHandleScroll);
+    return () => {
+      window.removeEventListener("scroll", debouncedHandleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (size?.width && size?.width > 768) {
@@ -19,18 +37,6 @@ const Navbar = () => {
       setToggleMenuNav(false);
     }
   }, [size.width]);
-
-  const headerHeight = 120; // Điều chỉnh theo chiều cao của header của bạn
-  const handleScroll = () => {
-    if (window.scrollY > headerHeight) {
-      setIsHeaderFixed(true);
-    } else {
-      setIsHeaderFixed(false);
-    }
-  };
-
-  // Đăng ký sự kiện cuộn trang
-  window.addEventListener("scroll", handleScroll);
 
   return (
     <div
@@ -56,7 +62,7 @@ const Navbar = () => {
               className="inline-flex items-center p-1 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-default"
               aria-expanded="false"
-              onClick={() => setToggleMenuNav(!toggleMenuNav)}
+              onClick={() => setToggleMenuNav((prevToggle) => !prevToggle)}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -73,7 +79,7 @@ const Navbar = () => {
                 />
               </svg>
             </button>
-            {toggleMenuNav ? <MenuNav /> : ""}
+            {toggleMenuNav && <MenuNav />}
           </div>
         </nav>
       </Container>

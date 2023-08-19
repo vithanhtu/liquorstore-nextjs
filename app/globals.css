@@ -71,6 +71,12 @@
   width: 92% !important;
   /* margin-right: 24px; */
 }
+/* .slick-dots li button:before {
+  background-color: #b7472a !important;
+  color: transparent !important;
+  border-radius: 50%;
+  border: 1px solid #fefefe;
+} */
 
 .product-overlay {
   position: absolute;
@@ -99,6 +105,15 @@
   border-color: #b7472a transparent transparent transparent;
 }
 
+.navigation--active {
+  background-color: #b7472a;
+  color: #fff;
+}
+
+.image-blog {
+  width: 50% !important;
+}
+
 @media screen and (min-width: 1660px) {
   .container {
     width: 75% !important;
@@ -109,7 +124,7 @@
   .blog-item {
     display: block;
   }
-  .blog-item > img {
-    width: 100%;
+  .image-blog {
+    width: 100% !important;
   }
 }

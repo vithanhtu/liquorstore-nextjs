@@ -1,35 +1,55 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Container";
 import ImgBanner from "@/public/images/about.jpg.webp";
+import AnimatedCounter from "../CountUp";
+import { usePathname } from "next/navigation";
+
+const categories = [
+  {
+    img: "kind-1.jpg.webp",
+    title: "Brandy",
+  },
+  {
+    img: "kind-2.jpg.webp",
+    title: "Gin",
+  },
+  {
+    img: "kind-3.jpg.webp",
+    title: "Rum",
+  },
+  {
+    img: "kind-4.jpg.webp",
+    title: "Tequila",
+  },
+  {
+    img: "kind-5.jpg.webp",
+    title: "Vodka",
+  },
+  {
+    img: "kind-6.jpg.webp",
+    title: "Whiskey",
+  },
+];
 
 const BannerHistory = () => {
-  const categories = [
-    {
-      img: "kind-1.jpg.webp",
-      title: "Brandy",
-    },
-    {
-      img: "kind-2.jpg.webp",
-      title: "Gin",
-    },
-    {
-      img: "kind-3.jpg.webp",
-      title: "Rum",
-    },
-    {
-      img: "kind-4.jpg.webp",
-      title: "Tequila",
-    },
-    {
-      img: "kind-5.jpg.webp",
-      title: "Vodka",
-    },
-    {
-      img: "kind-6.jpg.webp",
-      title: "Whiskey",
-    },
-  ];
+  const [shouldStartCountUp, setShouldStartCountUp] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 120 && !shouldStartCountUp) {
+        setShouldStartCountUp(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [shouldStartCountUp, pathname]);
 
   return (
     <Container>
@@ -62,7 +82,9 @@ const BannerHistory = () => {
               </p>
             </div>
             <p className="text-[26px] mt-7">
-              <strong className="text-brown-color mr-2 italic">115</strong>
+              <strong className="text-brown-color mr-2 italic">
+                {shouldStartCountUp && <AnimatedCounter start={1} end={115} />}
+              </strong>
               <span className="font-light text-[#333]">
                 Years of Experience In Business
               </span>
