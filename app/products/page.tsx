@@ -27,7 +27,8 @@ const Products = () => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  const allCategoriesSet = new Set(products?.map((item) => item?.category));
+  // Ensure products is properly typed
+  const allCategoriesSet = new Set(products.map((item: any) => item.category));
   const allCategories = [...Array.from(allCategoriesSet)];
 
   return (
