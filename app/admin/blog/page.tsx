@@ -1,9 +1,11 @@
 // pages/index.js
 "use client";
 
+import ClientOnly from "@/app/components/OnlyClient";
+import Header from "@/app/components/header/Header";
 import { useState } from "react";
 
-export default function Home() {
+export default function Blog() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [blogData, setblogData] = useState({
     title: "",
@@ -43,24 +45,30 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Add Blog</h1>
-      <input
-        type="text"
-        name="title"
-        placeholder="Title"
-        value={blogData.title}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Description"
-        value={blogData.description}
-        onChange={handleInputChange}
-      />
+      <ClientOnly>
+        <Header heading="blog admin" />
+      </ClientOnly>
 
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleAddBlog}>Add Blog</button>
+      <div>
+        <h1>Add Blog</h1>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={blogData.title}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={blogData.description}
+          onChange={handleInputChange}
+        />
+
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <button onClick={handleAddBlog}>Add Blog</button>
+      </div>
     </div>
   );
 }

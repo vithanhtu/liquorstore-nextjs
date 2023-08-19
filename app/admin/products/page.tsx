@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 
-export default function Home() {
+export default function Product() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [productData, setProductData] = useState({
     name: "",

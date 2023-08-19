@@ -127,4 +127,8 @@
   .image-blog {
     width: 100% !important;
   }
+  .contact-google-map {
+    margin-top: 60px;
+    height: 500px;
+  }
 }

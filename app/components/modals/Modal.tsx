@@ -68,10 +68,6 @@ const Modal: React.FC<ModalProps> = ({
     return null;
   }
 
-  // const dispatch = useDispatch();
-  // const user = getCurrentUser();
-  // user.then((data) => console.log(data));
-
   return (
     <>
       <div

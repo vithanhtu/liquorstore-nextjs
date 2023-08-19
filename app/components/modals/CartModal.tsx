@@ -10,6 +10,7 @@ import {
   addToCart,
   decreaseQuantity,
   increaseQuantity,
+  removeCartItem,
 } from "@/app/redux/features/cart-slice";
 
 const CartModal = () => {
@@ -145,11 +146,11 @@ const CartModal = () => {
                                       </div>
                                       <div className="flex">
                                         <button
-                                          // onClick={() =>
-                                          //   dispatch(removeItemCart(product.id))
-                                          // }
+                                          onClick={() =>
+                                            dispatch(removeCartItem(product.id))
+                                          }
                                           type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          className="font-medium text-brown-color hover:text-brown-primary"
                                         >
                                           Remove
                                         </button>
@@ -174,7 +175,7 @@ const CartModal = () => {
                     <div className="mt-6">
                       <a
                         href="#"
-                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        className="flex items-center justify-center rounded-md border border-transparent bg-brown-color px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-brown-primary"
                       >
                         Checkout
                       </a>
@@ -185,7 +186,7 @@ const CartModal = () => {
                         <Link href={"/product"} onClick={togleCart.onClose}>
                           <button
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium text-brown-color hover:text-brown-primary"
                           >
                             Continue Shopping
                             <span aria-hidden="true"> →</span>

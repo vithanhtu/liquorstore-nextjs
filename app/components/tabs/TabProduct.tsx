@@ -55,7 +55,11 @@ const TabProduct: React.FC<TabProductProps> = ({
 
       <div className="w-full h-auto px-5 py-6 bg-[#f2f2f2] mt-4">
         <h2 className="text-[28px]">
-          {activeTab == 0 ? name : "Manufactured By Liquor Store"}
+          {activeTab === 0
+            ? name
+            : "Manufactured By Liquor Store" && activeTab === 2
+            ? "Review"
+            : "Manufactured By Liquor Store"}
         </h2>
 
         <p className="mt-6 leading-7 text-light-text">{description}</p>

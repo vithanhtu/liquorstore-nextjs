@@ -3,12 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import { usePathname } from "next/navigation";
-import img1 from "../../public/images/image_1.jpg.webp";
-import img2 from "../../public/images/image_2.jpg.webp";
-import img3 from "../../public/images/image_3.jpg.webp";
-import img4 from "../../public/images/image_4.jpg.webp";
-import img5 from "../../public/images/image_5.jpg.webp";
-import img6 from "../../public/images/image_6.jpg.webp";
 import Image from "next/image";
 import Container from "../components/Container";
 import { BsCalendar3 } from "react-icons/bs";
@@ -33,7 +27,7 @@ const Blog = ({}) => {
       .catch((error) => console.error("Error fetching blogs:", error));
   }, []);
 
-  console.log(blogRecent);
+  // console.log(blogRecent);
 
   return (
     <div className={`${pathname === "/blog" ? "mt-0" : "mt-12"} mb-40`}>

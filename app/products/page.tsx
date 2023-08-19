@@ -31,7 +31,7 @@ const Products = () => {
   const allCategories = [...Array.from(allCategoriesSet)];
 
   return (
-    <div>
+    <div className="pb-20">
       <Header heading="Products" />
 
       <Container>

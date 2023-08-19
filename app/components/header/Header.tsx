@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../Container";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
@@ -14,6 +14,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { signOut } from "next-auth/react";
 import { useSelector } from "react-redux";
+import { debounce } from "lodash";
 import Avatar from "../Avatar";
 
 interface BannerProps {
@@ -27,6 +28,26 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
 
   const account = useSelector((state: any) => state.userReducer?.account);
   // console.log("account:", account);
+
+  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+
+  useEffect(() => {
+    const headerHeight = 120; // Adjust to your header's height
+    const handleScroll = () => {
+      if (window.scrollY > headerHeight) {
+        setIsHeaderFixed(true);
+      } else {
+        setIsHeaderFixed(false);
+      }
+    };
+
+    const debouncedHandleScroll = debounce(handleScroll, 100); // Use lodash.debounce
+
+    window.addEventListener("scroll", debouncedHandleScroll);
+    return () => {
+      window.removeEventListener("scroll", debouncedHandleScroll);
+    };
+  }, []);
 
   return (
     <ClientOnly>
@@ -105,7 +126,11 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
           <div className="overlay"></div>
           <Navbar />
           {heading ? (
-            <div className="text-white text-5xl relative top-8 flex justify-center items-center flex-col w-full h-full z-2">
+            <div
+              className={`text-white text-5xl relative flex ${
+                isHeaderFixed ? "justify-end pb-[120px]" : "justify-center"
+              } items-center flex-col w-full h-full z-2`}
+            >
               <h1 className="text-center">{heading}</h1>
             </div>
           ) : (
