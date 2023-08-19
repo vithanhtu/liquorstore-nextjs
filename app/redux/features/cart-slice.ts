@@ -25,11 +25,13 @@ export const cart = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    addToCart: (state, action: PayloadAction<Product>) => {
+    addToCart: (state: any, action: PayloadAction<Product>) => {
       const cartItems = action.payload;
-      const duplicate = state.products.find((item) => item.id === cartItems.id);
+      const duplicate = state.products.find(
+        (item: any) => item.id === cartItems.id
+      );
       if (duplicate) {
-        state.products = state.products.map((item) => {
+        state.products = state.products.map((item: any) => {
           return item.id === cartItems.id
             ? {
                 ...duplicate,
@@ -51,22 +53,22 @@ export const cart = createSlice({
       }
     },
 
-    increaseQuantity: (state, action: PayloadAction<string>) => {
+    increaseQuantity: (state: any, action: PayloadAction<string>) => {
       const productId = action.payload;
       const duplicateProd = state.products.find(
-        (item) => item.id === productId
+        (item: any) => item.id === productId
       );
 
       const newQty = duplicateProd.qty + 1;
-      state.products = state.products.map((item) =>
+      state.products = state.products.map((item: any) =>
         item.id === productId ? { ...item, qty: newQty } : item
       );
     },
 
-    decreaseQuantity: (state, action: PayloadAction<string>) => {
+    decreaseQuantity: (state: any, action: PayloadAction<string>) => {
       const productId = action.payload;
       const duplicateProd = state.products.find(
-        (item) => item.id === productId
+        (item: any) => item.id === productId
       );
 
       if (duplicateProd) {
@@ -75,15 +77,15 @@ export const cart = createSlice({
         // Đảm bảo newQty không dưới 1
         const updatedQty = Math.max(newQty, 1);
 
-        state.products = state.products.map((item) =>
+        state.products = state.products.map((item: any) =>
           item.id === productId ? { ...item, qty: updatedQty } : item
         );
       }
     },
 
-    removeCartItem: (state, action: PayloadAction<string>) => {
+    removeCartItem: (state: any, action: PayloadAction<string>) => {
       state.products = state.products.filter(
-        (item) => item.id !== action.payload
+        (item: any) => item.id !== action.payload
       );
     },
   },
