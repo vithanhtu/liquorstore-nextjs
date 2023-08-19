@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Container from "../Container";
-import { BsFillTelephoneFill } from "react-icons/bs";
+import { BsFillTelephoneFill, BsTwitter } from "react-icons/bs";
 import { BiPaperPlane } from "react-icons/bi";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import { AiOutlineTwitter } from "react-icons/Ai";
 import { FiDribbble } from "react-icons/fi";
 import Link from "next/link";
 import Navbar from "./navbar/Navbar";
@@ -72,7 +71,7 @@ const Header: React.FC<BannerProps> = ({ home, heading }) => {
                     <FaFacebookF className="text-xs" />
                   </Link>
                   <Link href={"/"}>
-                    <AiOutlineTwitter className="ml-2" />
+                    <BsTwitter className="ml-2" />
                   </Link>
                   <Link href={"/"}>
                     <FaInstagram className="ml-2" />
