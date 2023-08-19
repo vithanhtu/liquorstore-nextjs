@@ -2,9 +2,9 @@ import React from "react";
 import Container from "../Container";
 import { MdNavigateNext } from "react-icons/md";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import { AiOutlineTwitter, AiFillHeart } from "react-icons/Ai";
+import { AiFillHeart } from "react-icons/ai";
 import { FiDribbble } from "react-icons/fi";
-import { BsFillTelephoneFill, BsMapFill } from "react-icons/bs";
+import { BsFillTelephoneFill, BsMapFill, BsTwitter } from "react-icons/bs";
 import Link from "next/link";
 
 const Footer = () => {
@@ -33,7 +33,7 @@ const Footer = () => {
                   href={"/"}
                   className="bg-brown-color hover:bg-brown-primary w-8 h-8 rounded-[50%] flex justify-center items-center"
                 >
-                  <AiOutlineTwitter className="text-blue-100" />
+                  <BsTwitter className="text-blue-100" />
                 </Link>
                 <Link
                   href={"/"}
