@@ -36,8 +36,8 @@ export const cart = createSlice({
             ? {
                 ...duplicate,
                 qty: cartItems.qty
-                  ? duplicate.qty + cartItems.qty
-                  : duplicate.qty + 1,
+                  ? duplicate?.qty + cartItems.qty
+                  : duplicate?.qty + 1,
               }
             : item;
         });
@@ -72,7 +72,7 @@ export const cart = createSlice({
       );
 
       if (duplicateProd) {
-        const newQty = duplicateProd.qty - 1;
+        const newQty = duplicateProd?.qty - 1;
 
         // Đảm bảo newQty không dưới 1
         const updatedQty = Math.max(newQty, 1);
