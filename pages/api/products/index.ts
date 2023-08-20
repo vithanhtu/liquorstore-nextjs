@@ -26,7 +26,7 @@ export default async function handler(req: any, res: any) {
       const products = await prisma.product.findMany();
       return res.status(200).json({ products });
     } catch (error) {
-      return res.status(500).json({ error: "Internal server error" });
+      return res.status(500).json({ error: `Internal server error: ${error}` });
     }
   } else if (req.method === "POST") {
     // Xử lý phần tạo sản phẩm và tải lên ảnh ở đây...
