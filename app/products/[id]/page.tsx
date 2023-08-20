@@ -12,6 +12,7 @@ import TabProduct from "@/app/components/tabs/TabProduct";
 import useCartModal from "@/app/hooks/useCartModal";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/app/redux/features/cart-slice";
+import axios from "axios";
 
 interface Product {
   name: String;
@@ -41,9 +42,10 @@ const DetailPage = ({ params }: any) => {
   });
 
   useEffect(() => {
-    fetch(`/api/products/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get(`/api/products/${id}`)
+      .then((response: any) => {
+        const data = response.data;
         if (data.product) {
           setProduct(data.product);
         }

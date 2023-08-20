@@ -9,15 +9,17 @@ import { FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/features/cart-slice";
+import axios from "axios";
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("/api/products")
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get("/api/products")
+      .then((response: any) => {
+        const data = response.data;
         if (data.products) {
           setProducts(data.products);
         }

@@ -9,18 +9,20 @@ import { BsCalendar3 } from "react-icons/bs";
 import { MdNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
 import Link from "next/link";
+import axios from "axios";
 
 const Blog = ({}) => {
   const pathname = usePathname();
-  const [blogs, setblogs] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [blogRecent, setBlogRecent] = useState([]);
 
   useEffect(() => {
-    fetch("/api/blog")
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get("/api/blog")
+      .then((response: any) => {
+        const data = response.data;
         if (data.blogs) {
-          setblogs(data.blogs);
+          setBlogs(data.blogs);
           setBlogRecent(data.blogs.slice(0, 4));
         }
       })
