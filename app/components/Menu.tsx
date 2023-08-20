@@ -19,7 +19,7 @@ const Menu = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/products")
+      .get(`http://localhost:${process.env.PORT || 3000}/api/products`)
       .then((response) => {
         const data = response.data;
         if (data.products) {
