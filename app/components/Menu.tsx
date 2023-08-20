@@ -19,7 +19,7 @@ const Menu = () => {
 
   useEffect(() => {
     axios
-      .get("/api/products")
+      .get("http://localhost:3000/api/products")
       .then((response) => {
         const data = response.data;
         if (data.products) {
