@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/features/cart-slice";
 import axios from "axios";
 import LoadingIndicator from "./Loading";
+import dynamic from "next/dynamic";
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
@@ -113,4 +114,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default dynamic(() => Promise.resolve(Menu), { ssr: false });
