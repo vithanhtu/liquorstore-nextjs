@@ -17,25 +17,23 @@ const Menu = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch(); // State để kiểm soát trạng thái loading
 
-  const fetchData = async () => {
-    await axios
-      .get(`/api/products`)
-      .then((response) => {
-        const data = response.data;
-        if (data.products) {
-          setProducts(data.products);
-        }
-        setIsLoading(false); // Khi dữ liệu đã tải xong, set isLoading thành false
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-        setIsLoading(false); // Xảy ra lỗi cũng set isLoading thành false
-      });
-  };
-
   useEffect(() => {
-    fetchData();
-  }, [products]);
+    async () => {
+      await axios
+        .get(`/api/products`)
+        .then((response) => {
+          const data = response.data;
+          if (data.products) {
+            setProducts(data.products);
+          }
+          setIsLoading(false); // Khi dữ liệu đã tải xong, set isLoading thành false
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+          setIsLoading(false); // Xảy ra lỗi cũng set isLoading thành false
+        });
+    };
+  }, []);
 
   // console.log(products);
 
