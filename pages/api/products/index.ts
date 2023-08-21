@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 export default async function handler(req: any, res: any) {
-  if (req.method === "GET" || "get") {
+  if (req.method === "GET") {
     try {
       const products = await prisma.product.findMany();
       return res.status(200).json({ products });

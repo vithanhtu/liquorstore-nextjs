@@ -1,1 +1,5 @@
-export const API_URL_PRODUCT = "http://localhost:3000/api/products";
+const dev = process.env.NODE_ENV !== "production";
+
+export const server = dev
+  ? "http://localhost:3001"
+  : "https://liquorstore-nextjs.vercel.app";
