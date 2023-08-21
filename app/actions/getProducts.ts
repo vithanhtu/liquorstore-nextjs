@@ -1,9 +1,8 @@
 import axios from "axios";
-import { server } from "../config/https";
 
 export async function fetchDataProducts() {
   try {
-    const response = await axios.get(`${server}/api/products`);
+    const response = await axios.get(`${process.env.BASE_URL}/api/products`);
 
     if (response.status === 200) {
       return response.data;
