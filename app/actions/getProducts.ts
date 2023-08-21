@@ -2,7 +2,10 @@ import axios from "axios";
 
 export async function fetchDataProducts() {
   try {
-    const response = await axios.get(`http://localhost:3000/api/products`);
+    const response = await axios.get(
+      `http://localhost:3000/api/products` ||
+        "http://liquorstore-nextjs.vercel.app/api/products"
+    );
 
     if (response.status === 200) {
       return response.data;

@@ -11,23 +11,25 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/features/cart-slice";
 import Container from "../components/Container";
 import Header from "../components/header/Header";
-import axios from "axios";
+import { fetchDataProducts } from "../actions/getProducts";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("/api/products")
-      .then((response: any) => {
-        const data = response.data;
-        if (data.products) {
-          setProducts(data.products);
-        }
-      })
-      .catch((error) => console.error("Error fetching products:", error));
+    async function getProducts() {
+      try {
+        const data = await fetchDataProducts();
+        setProducts(data.products);
+      } catch (error) {}
+    }
+
+    getProducts();
+    return;
   }, []);
+
+  console.log(products);
 
   // Ensure products is properly typed
   const allCategoriesSet = new Set(products.map((item: any) => item.category));
