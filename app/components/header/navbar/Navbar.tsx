@@ -45,7 +45,7 @@ const Navbar = () => {
       }`}
     >
       <Container>
-        <nav className="bg-transparent max-md:py-0 py-3 border-gray-200 dark:bg-gray-900 relative">
+        <nav className="bg-transparent max-md:py-0 py-3 border-gray-200 relative">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
             <Link
               href="/"
